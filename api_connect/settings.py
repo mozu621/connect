@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from pathlib import Path
+from datetime import timedelta
 import os
 
 # このファイルからmanage.pyがある場所を示す。 __file__ → settings.py, dirname（） → connect/api_conect, dirname（dirname（）） → connect
@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # 追加
     'djoser',  # 追加
-    'api.apps.ApiConfig',  # 追加
+    'app.apps.ApiConfig',  # 追加
+    'accounts.apps.AccountsConfig',  # 追加
     'corsheaders',  # 追加
 ]
 
@@ -80,6 +81,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api_connect.wsgi.application'
 
+# 追加（DEFAULT_PERMISSION_CLASSES→認証の設定。IsAuthenticatedは認証されているユーザのみ許可
+#　　　DEFAULT_AUTHENTICATION_CLASSES→認証はどのクラスを使うかの設定。JWTを使う）
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+# 追加Simple JWTの設定
+SIMPLE_JWT = {
+    # トークンをJWTに設定
+    'AUTH_HEADER_TYPES': ('JWT',),
+    # トークンの持続時間の設定
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60)
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -87,7 +106,7 @@ WSGI_APPLICATION = 'api_connect.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -114,18 +133,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'accounts.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 STATIC_URL = 'static/'
 
 # Default primary key field type

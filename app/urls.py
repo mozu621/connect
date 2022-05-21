@@ -9,6 +9,7 @@ router.register('profile', views.ProfileViewSet)
 router.register('portfolio', views.PortfolioViewSet)
 router.register('like', views.LikeViewSet)
 router.register('comment', views.CommentViewSet)
+router.register('tag', views.TagViewSet)
 
 urlpatterns = [
     path('myprofile/', views.MyProfileListView.as_view(), name='myprofile'),

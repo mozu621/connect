@@ -1,4 +1,4 @@
-from .models import Profile, Portfolio, Like, Comment
+from .models import Profile, Portfolio, Like, Comment, Tag
 from rest_framework import serializers
 
 
@@ -7,7 +7,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'nickName', 'profileUser', 'created_on', 'img')
+        fields = ('id', 'nickName', 'introduction', 'profileUser', 'created_on', 'img')
         extra_kwargs = {'profileUser': {'read_only': True}}
 
 
@@ -16,7 +16,7 @@ class PortfolioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Portfolio
-        fields = ('id', 'title', 'url', 'author', 'created_on', 'img')
+        fields = ('id', 'title', 'url',  'content', 'author', 'created_on', 'img')
         extra_kwargs = {'author': {'read_only': True}}
 
 
@@ -32,3 +32,8 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ('id', 'text', 'commentUser', 'commentPortfolio')
         extra_kwargs = {'commentUser': {'read_only': True}}
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('id', 'tagname','tagPortfolio')

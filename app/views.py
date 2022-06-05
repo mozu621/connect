@@ -1,9 +1,11 @@
+
 from rest_framework import viewsets
 from . import serializers
 from rest_framework import generics
 from .models import Profile, Portfolio, Like, Comment, Tag
 from rest_framework.permissions import AllowAny
-
+import django_filters.rest_framework
+from django_filters.rest_framework import DjangoFilterBackend
 
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -23,10 +25,12 @@ class MyProfileListView(generics.ListAPIView):
         return self.queryset.filter(profileUser=self.request.user)
 
 
+
 class PortfolioViewSet(viewsets.ModelViewSet):
     queryset = Portfolio.objects.all()
     serializer_class = serializers.PortfolioSerializer
     permission_classes = (AllowAny,)
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
 
     def perform_create(self, serializer):
 
@@ -39,6 +43,14 @@ class LikeViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(likeUser=self.request.user)
+
+class FiliterLikeList(generics.ListAPIView):
+    queryset = Like.objects.all()
+    serializer_class = serializers.LikeSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['likePortfolio',]
+    permission_classes = (AllowAny,)
+
 
 
 class CommentViewSet(viewsets.ModelViewSet):
@@ -53,6 +65,16 @@ class TagViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.TagSerializer
     permission_classes = (AllowAny,)
 
+class TagPostViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = serializers.TagPostSerializer
+    permission_classes = (AllowAny,)    
 
+class FiliterTagList(generics.ListAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = serializers.TagSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['tagname',]
+    permission_classes = (AllowAny,)
 
 

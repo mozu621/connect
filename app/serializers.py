@@ -36,4 +36,12 @@ class CommentSerializer(serializers.ModelSerializer):
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
+        depth = 1
         fields = ('id', 'tagname','tagPortfolio')
+
+class TagPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+
+        fields = ('id', 'tagname','tagPortfolio')
+

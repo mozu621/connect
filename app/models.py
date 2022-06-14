@@ -26,6 +26,8 @@ class Profile(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     img = models.ImageField(blank=True, null=True,
                             upload_to=upload_avatar_path)
+    githuburl = models.URLField(max_length=200, unique=True, blank=True, null=True)
+    twitterurl = models.URLField(max_length=200, unique=True, blank=True, null=True)
 
     def __str__(self):
         return self.nickName

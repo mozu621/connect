@@ -14,9 +14,12 @@ def upload_portfolio_path(instance, filename):
 
 
 class Profile(models.Model):
+
+
     nickName = models.CharField(max_length=20)
     #追加
     introduction = models.CharField(max_length=300, blank=True, null=True)
+    career = models.CharField(max_length=100, blank=True, null=True)
     # ここまで
     profileUser = models.OneToOneField(
         settings.AUTH_USER_MODEL, related_name='profileUser',
@@ -26,8 +29,8 @@ class Profile(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     img = models.ImageField(blank=True, null=True,
                             upload_to=upload_avatar_path)
-    githuburl = models.URLField(max_length=200, unique=True, blank=True, null=True)
-    twitterurl = models.URLField(max_length=200, unique=True, blank=True, null=True)
+    githuburl = models.CharField(max_length=200,blank=True, null=True)
+    twitterurl = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.nickName
@@ -37,7 +40,7 @@ class Profile(models.Model):
 
 class Portfolio(models.Model):
     title = models.CharField(max_length=100)
-    url = models.URLField(max_length=200, unique=True, blank=True, null=True)
+    url = models.CharField(max_length=200, unique=True, blank=True, null=True)
     content = models.CharField(max_length=300, blank=True)
 
 
@@ -67,7 +70,8 @@ class Like(models.Model):
 
 
 class Comment(models.Model):
-    text = models.CharField(max_length=100)
+    text = models.CharField(max_length=200)
+    created_on = models.DateTimeField(auto_now_add=True)
     commentUser = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name='commentUser',
         on_delete=models.CASCADE

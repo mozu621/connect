@@ -8,6 +8,7 @@ router = DefaultRouter()
 router.register('profile', views.ProfileViewSet)
 router.register('portfolio', views.PortfolioViewSet)
 router.register('like', views.LikeViewSet)
+
 router.register('comment', views.CommentViewSet)
 router.register('tag', views.TagViewSet)
 router.register('tagpost', views.TagPostViewSet)
@@ -16,5 +17,7 @@ urlpatterns = [
     path('myprofile/', views.MyProfileListView.as_view(), name='myprofile'),
     path('tagfilter/', views.FiliterTagList.as_view(), name='tagfilter'),
     path('likefilter/', views.FiliterLikeList.as_view(), name='likefilter'),
+    path('likeportfolio/', views.FiliterLikePortfolio.as_view(), name='likeportfolio'),
+    path('popular/', views.PopularViewSet.as_view(), name='popular'),
     path('', include(router.urls))
 ]

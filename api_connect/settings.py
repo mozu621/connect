@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 env=environ.Env(DEBUG=(bool,False))
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-SECRET_KEY=env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG=env('DEBUG')
 

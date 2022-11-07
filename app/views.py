@@ -1,8 +1,8 @@
 
 from rest_framework import viewsets
-from . import serializers
+from connect.app import serializers
 from rest_framework import generics
-from .models import Profile, Portfolio, Like, Comment, Tag
+from connect.app.models import Profile, Portfolio, Like, Comment, Tag
 from rest_framework.permissions import AllowAny
 import django_filters.rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
@@ -45,6 +45,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
 class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
     serializer_class = serializers.LikeSerializer
+    permission_classes = (AllowAny,)
 
     def perform_create(self, serializer):
         serializer.save(likeUser=self.request.user)

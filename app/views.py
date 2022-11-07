@@ -45,9 +45,11 @@ class PortfolioViewSet(viewsets.ModelViewSet):
 class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
     serializer_class = serializers.LikeSerializer
+    permission_classes = (AllowAny,)
 
     def perform_create(self, serializer):
         serializer.save(likeUser=self.request.user)
+
 
 
 class PopularViewSet(generics.ListAPIView):

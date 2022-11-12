@@ -1,8 +1,8 @@
 
 from rest_framework import viewsets
-from connect.app.serializers import serializers
+from app.serializers import serializers
 from rest_framework import generics
-from connect.app.models import Profile, Portfolio, Like, Comment, Tag
+from app.models import Profile, Portfolio, Like, Comment, Tag
 from rest_framework.permissions import AllowAny
 import django_filters.rest_framework
 from django_filters.rest_framework import DjangoFilterBackend

@@ -1,8 +1,8 @@
 
 from rest_framework import viewsets
-from app.serializers import serializers
+from app.serializers import  ProfileSerializer
 from rest_framework import generics
-from app.models import Profile, Portfolio, Like, Comment, Tag
+from models import Profile, Portfolio, Like, Comment, Tag
 from rest_framework.permissions import AllowAny
 import django_filters.rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
@@ -10,7 +10,7 @@ from django.db.models import Count
 
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
-    serializer_class = serializers.ProfileSerializer
+    serializer_class = ProfileSerializer
     permission_classes = (AllowAny,)
 
 

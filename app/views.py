@@ -1,6 +1,6 @@
 
 from rest_framework import viewsets
-from connect.app import serializers
+from connect.app.serializers import serializers
 from rest_framework import generics
 from connect.app.models import Profile, Portfolio, Like, Comment, Tag
 from rest_framework.permissions import AllowAny

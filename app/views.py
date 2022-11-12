@@ -1,8 +1,8 @@
 
 from rest_framework import viewsets
-from app.serializers import  ProfileSerializer
+from app.serializers import  ProfileSerializer, PortfolioSerializer, LikeSerializer, PopularSerializer, CommentSerializer, TagSerializer, TagPostSerializer
 from rest_framework import generics
-from models import Profile, Portfolio, Like, Comment, Tag
+from app.models import Profile, Portfolio, Like, Comment, Tag
 from rest_framework.permissions import AllowAny
 import django_filters.rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
@@ -20,7 +20,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
 class MyProfileListView(generics.ListAPIView):
     queryset = Profile.objects.all()
-    serializer_class = serializers.ProfileSerializer
+    serializer_class = ProfileSerializer
     permission_classes = (AllowAny,)
 
     def get_queryset(self):
@@ -30,7 +30,7 @@ class MyProfileListView(generics.ListAPIView):
 
 class PortfolioViewSet(viewsets.ModelViewSet):
     queryset = Portfolio.objects.all()
-    serializer_class = serializers.PortfolioSerializer
+    serializer_class = PortfolioSerializer
     permission_classes = (AllowAny,)
     filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
 
@@ -44,7 +44,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
 
 class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
-    serializer_class = serializers.LikeSerializer
+    serializer_class = LikeSerializer
     permission_classes = (AllowAny,)
 
     def perform_create(self, serializer):
@@ -54,7 +54,7 @@ class LikeViewSet(viewsets.ModelViewSet):
 
 class PopularViewSet(generics.ListAPIView):
     queryset = Portfolio.objects.annotate(likes=Count('likePortfolio')).order_by('-likes')
-    serializer_class = serializers.PopularSerializer
+    serializer_class = PopularSerializer
     permission_classes = (AllowAny,)
 
     def perform_create(self, serializer):
@@ -62,38 +62,38 @@ class PopularViewSet(generics.ListAPIView):
 
 class FiliterLikeList(generics.ListAPIView):
     queryset = Like.objects.all()
-    serializer_class = serializers.LikeSerializer
+    serializer_class = LikeSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['likePortfolio',]
     permission_classes = (AllowAny,)
 
 class FiliterLikePortfolio(generics.ListAPIView):
     queryset = Like.objects.all()
-    serializer_class = serializers.LikeSerializer
+    serializer_class = LikeSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['likeUser',]
     permission_classes = (AllowAny,)
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
-    serializer_class = serializers.CommentSerializer
+    serializer_class = CommentSerializer
 
     def perform_create(self, serializer):
         serializer.save(commentUser=self.request.user)
 
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
-    serializer_class = serializers.TagSerializer
+    serializer_class = TagSerializer
     permission_classes = (AllowAny,)
 
 class TagPostViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
-    serializer_class = serializers.TagPostSerializer
+    serializer_class = TagPostSerializer
     permission_classes = (AllowAny,)    
 
 class FiliterTagList(generics.ListAPIView):
     queryset = Tag.objects.all()
-    serializer_class = serializers.TagSerializer
+    serializer_class = TagSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['tagname',]
     permission_classes = (AllowAny,)

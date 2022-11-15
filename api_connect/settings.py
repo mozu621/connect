@@ -58,6 +58,7 @@ MIDDLEWARE = [
 # 追加
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'https://vercel.com/mozu621/next-js-connect-a3bk'
 ]
 
 ROOT_URLCONF = 'api_connect.urls'

@@ -59,7 +59,10 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'https://localhost:3000',
-    'https://vercel.com/mozu621/next-js-connect-a3bk'
+    'https://vercel.com/mozu621/next-js-connect-a3bk',
+    'https://connect-mozu.site'
+
+
 ]
 
 ROOT_URLCONF = 'api_connect.urls'

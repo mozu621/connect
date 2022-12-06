@@ -63,6 +63,19 @@ CORS_ORIGIN_WHITELIST = [
     'https://connect-mozu.site',
 ]
 
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'access-control-allow-origin',
+)
+
 ROOT_URLCONF = 'api_connect.urls'
 
 TEMPLATES = [

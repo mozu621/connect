@@ -61,8 +61,6 @@ CORS_ALLOWED_ORIGINS = [
 
 CSRF_TRUSTED_ORIGINS    = ['localhost:3000', '127.0.0.1', 'onnect-mozu.site']
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
   'accept',
   'accept-encoding',

@@ -59,6 +59,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
 ]
 
+CSRF_TRUSTED_ORIGINS    = [ "https://connect-mozu.site" ]
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True

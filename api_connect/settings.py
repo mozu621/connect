@@ -57,7 +57,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://next-js-connect-a3bk.vercel.app:3000'
+    'http://next-js-connect-a3bk.vercel.app:3000'
 ]
 
 CSRF_TRUSTED_ORIGINS    = ['next-js-connect-a3bk.vercel.app','127.0.0.1', 'connect-mozu.site']

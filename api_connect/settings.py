@@ -36,12 +36,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',  # 追加
     'rest_framework',  # 追加
     'django_filters', #追加 5/25
     'djoser',  # 追加
     'app.apps.ApiConfig',  # 追加
     'accounts.apps.AccountsConfig',  # 追加
-    'corsheaders',  # 追加
+    
 ]
 
 MIDDLEWARE = [
@@ -56,23 +57,33 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'https://next-js-connect-a3bk.vercel.app',
-    "http://127.0.0.1:3000"
+#CORS_ALLOWED_ORIGINS = [
+#    'https://next-js-connect-a3bk.vercel.app',
+#    "http://127.0.0.1:3000"
+#]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
 ]
 
-#CSRF_TRUSTED_ORIGINS    = ['next-js-connect-a3bk.vercel.app','127.0.0.1', 'connect-mozu.site']
-
 CORS_ALLOW_HEADERS = [
-  'accept',
-  'accept-encoding',
-  'authorization',
-  'content-type',
-  'origin',
-  'dnt',
-  'user-agent',
-  'x-csrftoken',
-  'x-requested-with']
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'api_connect.urls'
 

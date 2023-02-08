@@ -30,7 +30,7 @@ class Profile(models.Model):
     img = models.ImageField(blank=True, null=True,
                             upload_to=upload_avatar_path)
     githuburl = models.CharField(max_length=200,blank=True, null=True)
-    twitterurl = models.CharField(max_length=200, blank=True, null=True)
+    #twitterurl = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.nickName
